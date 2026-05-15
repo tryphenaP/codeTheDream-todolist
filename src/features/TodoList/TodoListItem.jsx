@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {TextInputWithLabel} from '../../shared/TextInputWithLabel.jsx';
+import TextInputWithLabel from '../../shared/TextInputWithLabel.jsx';
 import { isValidTodoTitle } from '../../utils/todoValidation.js';
 import { useEditableTitle } from '../../hooks/useEditableTitle.js';
 
@@ -24,6 +24,8 @@ const handleUpdate = (event) => {
         {isEditing ? (
             <TextInputWithLabel value={workingTitle} 
             onChange={e => updateTitle(e.target.value)}
+            elementId={`todoTitle${todo.id}`}
+              labelText="Todo Title" 
             
             />
             
