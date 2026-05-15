@@ -1,9 +1,18 @@
 import { useRef } from 'react';
 import { useState } from 'react';
+import {TextInputWithLabel} from '../../shared/TextInputWithLabel.jsx';
+import {isValidTodoTitle} from '../../utils/todoValidation.js';
+
+
 
 function TodoForm({ onAddTodo }) {
 const inputRef = useRef();
 const [workingTodo, setWorkingTodo] = useState('');
+
+
+
+
+
 
   const handleAddTodo = (event) => {
     event.preventDefault();
@@ -19,19 +28,18 @@ const [workingTodo, setWorkingTodo] = useState('');
   };
   return (
   <form onSubmit={handleAddTodo}>
-    <label htmlFor="todoTitle">Todo</label>
-    <input
-      ref={inputRef}
+     
+    <TextInputWithLabel
       type="text"
-      id="todoTitle"
-      placeholder={'Todo text'}
-      required
+      elementId="todoTitle"
+      labelText="Todo"
       value={workingTodo}
-      onChange={(e) => setWorkingTodo(e.target.value)}
+     onChange={(e)=> setWorkingTodo(e.target.value)}
+     ref={inputRef}
+    
     />
-    <button type="submit" disabled={!workingTodo.trim()}>
-      Add Todo
-    </button>
+   
+   <button disabled={!isValidTodoTitle(workingTodo)} >Add Todo</button>
   </form>
 );
 
