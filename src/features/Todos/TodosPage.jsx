@@ -14,7 +14,7 @@ function TodosPage({ token }) {
     setIsTodoListLoading(true);
 
     try {
-      const response = await fetch('/api/todos', {
+      const response = await fetch('/api/tasks', {
         method: 'GET',
         headers: {
           'X-CSRF-TOKEN': token,

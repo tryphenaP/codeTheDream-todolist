@@ -37,19 +37,27 @@ function Logon({
   }
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
         {authError && (
         <p style={{ color: "red" }}>
           {authError}
         </p>
       )}
       <label>Email</label>
-      <input type="email" required />
+      <input 
+      type="email" 
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      required />
 
       <label>Password</label>
-      <input type="password" required />
+      <input 
+      type="password" 
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      required />
 
-      <button type="submit">Login</button>
+      <button disabled={isLoggingOn}> {isLoggingOn ? 'Logging on...' : 'Log On'}  </button>
     </form>
   );
 }
