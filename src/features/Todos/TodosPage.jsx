@@ -23,7 +23,6 @@ function TodosPage({ token }) {
   const [filterError, setFilterError] = useState('');
 
   const invalidateCache = useCallback(() => {
-  console.log('Invalidating memo cache after todo mutation');
 
   setDataVersion((prev) => prev + 1);
   }, []);
@@ -95,13 +94,8 @@ function TodosPage({ token }) {
       title: todoTitle,
       isCompleted: false
     };
-    setTodoList((previous) =>
-  previous.map((todo) =>
-    todo.id === newTodo.id ? data.task : todo
-  )
-);
-
-     invalidateCache();
+    setTodoList((previous) => [...previous, newTodo]);
+  invalidateCache();
 
     try {
     const response = await fetch('/api/tasks', {
