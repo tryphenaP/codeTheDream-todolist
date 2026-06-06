@@ -1,13 +1,13 @@
 import { useRef } from 'react';
 import { useState } from 'react';
-import TextInputWithLabel from '../shared/TextInputWithLabel.jsx';
-import {isValidTodoTitle} from '../utils/todoValidation.js';
+import TextInputWithLabel from '../../shared/TextInputWithLabel.jsx';
+import {isValidTodoTitle} from '../../utils/todoValidation.js';
 
 
 
 function TodoForm({ onAddTodo }) {
 const inputRef = useRef();
-const [workingTodo, setWorkingTodo] = useState('');
+const [workingTodoTitle, setWorkingTodoTitle] = useState('');
 
 
 
@@ -19,10 +19,10 @@ const [workingTodo, setWorkingTodo] = useState('');
 
   
     // .trim prevents whitespace only todos
-    const todoTitle = workingTodo.trim() ;
+    const todoTitle = workingTodoTitle.trim() ;
     if (todoTitle ) {
       onAddTodo(todoTitle);
-      setWorkingTodo("");
+      setWorkingTodoTitle("");
       inputRef.current.focus();
     }
   };
@@ -30,16 +30,16 @@ const [workingTodo, setWorkingTodo] = useState('');
   <form onSubmit={handleAddTodo}>
      
     <TextInputWithLabel
-      type="text"
+      
       elementId="todoTitle"
-      labelText="Todo"
-      value={workingTodo}
-     onChange={(e)=> setWorkingTodo(e.target.value)}
+      labelText="Todo Title"
+      value={workingTodoTitle}
+     onChange={(e)=> setWorkingTodoTitle(e.target.value)}
      ref={inputRef}
     
     />
    
-   <button disabled={!isValidTodoTitle(workingTodo)} >Add Todo</button>
+   <button disabled={!isValidTodoTitle(workingTodoTitle)} >Add Todo</button>
   </form>
 );
 
