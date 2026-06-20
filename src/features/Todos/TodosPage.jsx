@@ -158,7 +158,7 @@ try {
       credentials: 'include',
       body: JSON.stringify({
         isCompleted: true,
-        createdAt: originalTodo.createdAt,
+        
       }),
     });
 
@@ -215,7 +215,7 @@ const updatedTodos = todoList.map(todo => {
       body: JSON.stringify({
         title: editedTodo.title,
         isCompleted: editedTodo.isCompleted,
-        createdAt: editedTodo.createdAt,
+       
       }),
     });
 
