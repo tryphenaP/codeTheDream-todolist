@@ -30,7 +30,7 @@ export const initialTodoState = {
   todoList: [],
   error: '',
   filterError: '',
-  isTodoListLoading: false,
+  isTodoListLoading: true,
   sortBy: 'creationDate',
   sortDirection: 'desc',
   filterTerm: '',
@@ -60,7 +60,13 @@ export function todoReducer(state, action) {
       return {
         ...state,
         isTodoListLoading: false,
-        error: action.payload,
+        error: action.payload?.isFilterError
+      ? ''
+      : action.payload?.message,
+
+    filterError: action.payload?.isFilterError
+      ? action.payload?.message
+      : '',
       };
 
     case TODO_ACTIONS.CLEAR_ERROR:
@@ -108,8 +114,8 @@ export function todoReducer(state, action) {
     todoList: [
       ...state.todoList.filter(Boolean),
       {
-        id: action.payload.tempId || crypto.randomUUID(),
-        title: action.payload.title || "",
+        id: action.payload.id ,
+        title: action.payload.title ,
         isCompleted: false,
         isTemp: true,
       },
@@ -130,6 +136,8 @@ export function todoReducer(state, action) {
       return {
         ...state,
         error: action.payload,
+        todoList: state.todoList.filter(
+      (todo) => todo?.id !== action.payload.id),
       };
 
     // COMPLETE TODO
