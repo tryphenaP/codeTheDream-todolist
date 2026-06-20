@@ -13,7 +13,7 @@ function TodosPage({ token }) {
   const [fetchError, setFetchError] = useState('');
   const [isTodoListLoading, setIsTodoListLoading] = useState(false);
 
-  const [sortBy, setSortBy] = useState('creationDate');
+  const [sortBy, setSortBy] = useState('createdAt');
   const [sortDirection, setSortDirection] = useState('desc');
 
   const [filterTerm, setFilterTerm] = useState('');
@@ -71,7 +71,7 @@ function TodosPage({ token }) {
     } catch (error) {
       if (
     debouncedFilterTerm ||
-    sortBy !== 'creationDate' ||
+    sortBy !== 'createdAt' ||
     sortDirection !== 'desc'
   ) {
     setFilterError(
@@ -278,7 +278,7 @@ const updatedTodos = todoList.map(todo => {
     <button
       onClick={() => {
         setFilterTerm('');
-        setSortBy('creationDate');
+        setSortBy('createdAt');
         setSortDirection('desc');
         setFilterError('');
       }}
