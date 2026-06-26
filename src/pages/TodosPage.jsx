@@ -4,7 +4,9 @@ import SortBy from '/src/shared/SortBy.jsx';
 import FilterInput from '/src/shared/FilterInput.jsx';
 import useDebounce from '/src/utils/useDebounce.js';
 import '/src/App.css';
-import { useAuth } from '/src/contexts/AuthContext';
+import { useAuth } from '/src/contexts/auth.js';
+import { useSearchParams } from 'react-router-dom';
+import StatusFilter from '../shared/StatusFilter';
 
 import { useEffect, useReducer, useCallback } from 'react';
 
@@ -16,10 +18,12 @@ import {
 
 function TodosPage() {
   const { token } = useAuth();
+   const [searchParams] = useSearchParams();
   const [state, dispatch] = useReducer(
     todoReducer,
     initialTodoState
   );
+const statusFilter = searchParams.get('status') || 'all';  
 
   const {
     todoList,
@@ -353,6 +357,7 @@ function TodosPage() {
           })
         }
       />
+      <StatusFilter /> 
 
       <FilterInput
         filterTerm={filterTerm}
@@ -368,6 +373,7 @@ function TodosPage() {
         dataVersion={dataVersion}
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
+        statusFilter={statusFilter}
       />
     </div>
   );

@@ -1,16 +1,5 @@
-import { createContext, useContext, useState } from 'react';
-
-// Create the context
-const AuthContext = createContext();
-
-// Custom hook with error checking
-export function useAuth() {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-}
+import { useState } from 'react';
+import { AuthContext } from './auth.js';
 
 export function AuthProvider({ children }) {
   // State for authentication
@@ -41,7 +30,7 @@ export function AuthProvider({ children }) {
         error: `Authentication failed: ${data?.message}`,
       };
     }
-  } catch (error) {
+  } catch {
     return {
       success: false,
       error: 'Network error during login',
@@ -109,4 +98,3 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
-
