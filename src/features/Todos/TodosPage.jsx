@@ -32,6 +32,7 @@ function TodosPage() {
     dataVersion,
   } = state;
 
+
   const debouncedFilterTerm = useDebounce(filterTerm, 300);
 
   const invalidateCache = useCallback(() => {
