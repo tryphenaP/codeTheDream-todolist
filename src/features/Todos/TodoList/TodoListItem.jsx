@@ -12,7 +12,7 @@ const handleUpdate = (event) => {
   if (!isEditing) return;
   event.preventDefault();
   const finalTitle = finishEdit();
-  if (!isValidTodoTitle(finalTitle)) return;
+  if (!finalTitle || !isValidTodoTitle(finalTitle)) return;
   onUpdateTodo({ ...todo, title: finalTitle });
   cancelEdit();
 };
@@ -24,7 +24,7 @@ const handleUpdate = (event) => {
         {isEditing ? (
             <TextInputWithLabel value={workingTitle} 
             onChange={e => updateTitle(e.target.value)}
-            elementId={`todoTitle${todo.id}`}
+            elementId={`todoTitle${todo?.id}`}
               labelText="Todo Title" 
             
             />
@@ -35,14 +35,14 @@ const handleUpdate = (event) => {
                 <label>
                     <input
                         type="checkbox"
-                        id={`checkbox${todo.id}`}
-                        checked={todo.isCompleted}
-                        onChange={() => onCompleteTodo(todo.id)}
+                        id={`checkbox${todo?.id}`}
+                        checked={Boolean(todo?.isCompleted)}
+                        onChange={() => onCompleteTodo(todo?.id)}
                          
                          
                     />
                 </label>
-                <span onClick={() => startEditing()}>{todo.title}</span>
+                <span onClick={() => startEditing()}>{todo?.title || "Untitled" }</span>
             </>
         )}<button type="button" onClick={cancelEdit}>
           Cancel
